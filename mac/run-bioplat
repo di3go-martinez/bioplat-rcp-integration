@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+
+BASEDIR=`dirname $0`
+cp $BASEDIR/db/bioplat.h2.db /tmp/ 
+#h2.connection.url=jdbc:h2:$(pwd)/db/bioplat
+exec $BASEDIR/bioplat

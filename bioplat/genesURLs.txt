@@ -1,0 +1,5 @@
+NCBI::http://www.ncbi.nlm.nih.gov/gene/?term={genId}
+Gene Cards::http://www.genecards.org/cgi-bin/carddisp.pl?gene={genName}
+RNAseq_Atlas::http://medicalgenomics.org/details_view_limited?gene_id={genId}
+IntegromeDB::http://integromedb.org/pages/gwt_attributes/list.jsp?string={genName}&integrome=
+String confidence::http://string-db.org/api/image/network?identifier={ensemblId}&required_score=950&limit=10&network_flavor=confidence
