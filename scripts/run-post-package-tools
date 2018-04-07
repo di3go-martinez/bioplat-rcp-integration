@@ -5,7 +5,7 @@ set -u
 
 version=${1?"Falta la versión de Bioplat a empaquetar"}
 
-cp -r ../post-package-tools releng/org.bioplat.product/target/products/
+cp -r bioplat-rcp-integration/post-package-tools releng/org.bioplat.product/target/products/
 
 cd releng/org.bioplat.product/target/products/
 
