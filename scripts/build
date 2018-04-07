@@ -37,3 +37,6 @@ mvn --offline clean
 
 kill $(cat eclipse-minimal/p2-repo/jetty.pid)
 
+#este paso es para que se pueda tirar el build nuevamente desde un working directory
+git checkout  releng/org.bioplat.target/org.bioplat.target.target
+
