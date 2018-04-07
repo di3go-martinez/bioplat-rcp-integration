@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-
+################3
+#
+# Este script genera la metadata para el repository p2 y lo levavta según el proyecto p2-repo
+#
+####################
 
 #FIXME definir una variable del estilo ECLIPSE_HOME
 #chequeo si existe el archivo eclipse, asumo que es una distribución de eclipse
