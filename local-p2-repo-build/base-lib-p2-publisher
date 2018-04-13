@@ -14,14 +14,14 @@ set -u
 base_lib_module=${1?"Falta el directorio donde se encuentra el módulo base.lib"}
 (cd $base_lib_module && mvn verify package)
 #se genera un solo bundle/jar, el que corresponde
-base_lib_jar=$base_lib_module/target/*.jar
+base_lib_jar=$(cd $base_lib_module/target && readlink -f *.jar)
 
 set -e
 
 launcher=plugins/org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar
-target_repository=file:$(pwd)/p2-repo/target/repository
+target_repository=file:$(cygpath -aw $(pwd)/p2-repo/target/repository)
 
-repo_source="/tmp/source~$RANDOM"
+repo_source=$(cygpath -aw "/tmp/source~$RANDOM")
 #se requiere que el bundle esté dentro del directorio plugins
 mkdir -p $repo_source/plugins
 
@@ -38,7 +38,7 @@ java -jar $launcher \
   -compress \
   -publishArtifacts
 
-category_file="file:$(pwd)/category.xml"
+category_file="file:$(cygpath -aw $(pwd)/category.xml)"
 java -jar $launcher \
   -application org.eclipse.equinox.p2.publisher.CategoryPublisher \
   -data /tmp/ws-$RANDOM \
