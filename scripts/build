@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+. path-utils
 
 #FIXME revisar que el working directory esté limpio
 #FIXME si hay un tag para el commit actual tiene precedencia. en ese caso debería igual devolver el commit id. 
@@ -21,10 +22,11 @@ if [ -z "$version"  ];then
   echo "calculated version -> $version"
 fi
 
-base_lib_folder="$(cygpath -aw $(pwd)/bundles/base.lib)"
-(echo -n "Publicando repo p2 con base lib" && cd eclipse-minimal && ./base-lib-p2-publisher "$base_lib_folder" >/dev/null &)
+wd="$(pwd)"
+base_lib_folder="$(resolve_path $(pwd)/bundles/base.lib)"
+(echo -n "Publicando repo p2 con base lib" && cd eclipse-minimal && ./base-lib-p2-publisher "$base_lib_folder" "$wd" >/dev/null &)
 
-while ! curl --silent http://localhost:8080/site/artifacts.jar > /dev/null ;do
+while ! curl --connect-timeout 2 --silent http://localhost:8080/site/artifacts.jar > /dev/null ;do
   echo -n "."
   sleep 10s
 done
