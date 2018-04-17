@@ -9,19 +9,21 @@
 #chequeo si existe el archivo eclipse, asumo que es una distribución de eclipse
 [ -e eclipse  ] || (echo "Este script se ejecuta desde el directorio de Eclipse. copiar este $0 y p2-repo" && exit 1)
 
+. $2/path-utils
+
 set -u
 
 base_lib_module=${1?"Falta el directorio donde se encuentra el módulo base.lib"}
 (cd $base_lib_module && mvn verify package)
 #se genera un solo bundle/jar, el que corresponde
-base_lib_jar=$base_lib_module/target/*.jar
+base_lib_jar=$(cd $base_lib_module/target && readlink -f *.jar)
 
 set -e
 
 launcher=plugins/org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar
-target_repository=file:$(pwd)/p2-repo/target/repository
+target_repository=file:$(resolve_path $(pwd)/p2-repo/target/repository)
 
-repo_source="/tmp/source~$RANDOM"
+repo_source=$(resolve_path "/tmp/source~$RANDOM")
 #se requiere que el bundle esté dentro del directorio plugins
 mkdir -p $repo_source/plugins
 
@@ -38,7 +40,7 @@ java -jar $launcher \
   -compress \
   -publishArtifacts
 
-category_file="file:$(pwd)/category.xml"
+category_file="file:$(resolve_path $(pwd)/category.xml)"
 java -jar $launcher \
   -application org.eclipse.equinox.p2.publisher.CategoryPublisher \
   -data /tmp/ws-$RANDOM \

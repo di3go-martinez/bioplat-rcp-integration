@@ -1,0 +1,14 @@
+
+
+function resolve_path {
+  path=$1
+  
+  case $OSTYPE in
+    cygwin)
+	cygpath -aw $path
+	;;
+    linux*)
+	readlink -f $path
+	;;
+  esac
+}
