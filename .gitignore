@@ -1,2 +1,8 @@
 clean-rcp-oxygen
+clean-rcp-oxygen.tar.gz
 eclipse-minimal-ok-heavy/
+post-package-tools/bioplat/db/bioplat.h2.db 
+post-package-tools/bioplat/db/bioplat.trace.db 
+post-package-tools/linux/jre*-x86_64.tar.gz 
+post-package-tools/mac/jre*.tar.gz 
+post-package-tools/windows/jre*.zip

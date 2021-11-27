@@ -1,0 +1,23 @@
+#!/usr/bin/env python 
+
+import gdown
+
+
+GOOGLE='https://drive.google.com/uc?id='
+
+files = [
+  ('clean-rcp-oxygen.tar.gz', '1SgjwXqfyUqWXdL1PfjRuH8K1bGLd-ul9' ),
+  ('post-package-tools/windows/jre-1.8_161.x86_64.zip', '1aGx6ltgcJD95IsFtsYvAKIn3Ceu5DjgQ'),
+  ('post-package-tools/mac/jre-1.8_161.tar.gz', '1AVHW70--aeM8PNnx9-Vw2EJz5JgnSf91'),
+  ('post-package-tools/linux/jre1.8.0_161-x86_64.tar.gz', '13tu3SBwgo0YF9IlNKeGXLSyMWK4y1Wbs'),
+  ('post-package-tools/bioplat/db/bioplat.h2.db','1-5kYAD6CcREsgKeAp48665k_yw18qmaR')
+]
+
+
+list(map(lambda x: gdown.download(GOOGLE+x[1], x[0]) , files))
+
+
+import tarfile
+tar = tarfile.open("clean-rcp-oxygen.tar.gz")
+tar.extractall()
+tar.close()
